@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <header class="p-3 text-bg-dark" th:fragments="header" >
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="/" class="nav-link px-2 text-white">Főoldal</a></li>
-        <li><a href="/musor" class="nav-link px-2 text-white">Moziműsor</a></li>
-        <li><a href="/belepes" class="nav-link px-2 text-white">Belépés/Regisztráció</a></li>
-        <li><a href="/kapcsolat" class="nav-link px-2 text-white">Kapcsolat</a></li>
-        <li><a href="/uzenetek" class="nav-link px-2 text-white">Üzenetek</a></li>
+        <li><span sec:authorize="isAnonymous()"><a href="/" class="nav-link px-2 text-white">Főoldal</a></span></li>
+        <li><span sec:authorize="isAnonymous()"><a href="/musor" class="nav-link px-2 text-white">Moziműsor</a></span></li>
+        <li><span sec:authorize="isAnonymous()"><a href="/belepes" class="nav-link px-2 text-white">Belépés/Regisztráció</a></span></li>
+        <li><span sec:authorize="isAuthenticated()"><a href="/kapcsolat" class="nav-link px-2 text-white">Kapcsolat</a></span></li>
+        <li><span sec:authorize="hasRole('ROLE_ADMIN')"><a href="/uzenetek" class="nav-link px-2 text-white">Üzenetek</a></span></li>
       </ul>
 
     </div>

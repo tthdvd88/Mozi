@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="Hu">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="Hu">
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/styles/css/bootstrap.min.css}" rel="stylesheet" />
@@ -10,6 +10,9 @@
 <body>
 <div class="container">
     <h1>Home Page</h1>
+    <div sec:authorize="isAuthenticated()">
+        <h3>Welcome <span sec:authentication="principal.username">User</span></h3>
+    </div>
 </div>
 </body>
 <footer th:replace="~{footer}"> </footer>
