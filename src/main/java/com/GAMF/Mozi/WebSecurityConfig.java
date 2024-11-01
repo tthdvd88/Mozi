@@ -30,14 +30,15 @@ public class WebSecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers("/").permitAll()
+                                .requestMatchers("/","/program", "regist", "login").permitAll()
                                 .requestMatchers("/styles/**").permitAll()
-                                .requestMatchers("/resources/**", "/","/home").authenticated()
+                                .requestMatchers("/connection").authenticated()
                                 .requestMatchers("/messages").hasRole("ADMIN")
                 )
                 .formLogin(
                         form -> form
-                                .defaultSuccessUrl("/home").permitAll()
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/").permitAll()
                 ).logout(
                         logout -> logout
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
