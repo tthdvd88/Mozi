@@ -32,14 +32,21 @@ public class WebSecurityConfig {
                         auth -> auth
                                 .requestMatchers("/","/program", "regist", "login").permitAll()
                                 .requestMatchers("/styles/**").permitAll()
-                                .requestMatchers("/connection").authenticated()
-                                .requestMatchers("/messages").hasRole("ADMIN")
+                                .requestMatchers("/connection").permitAll()
+                                .requestMatchers("/messages").permitAll()
+                                .requestMatchers("/connection_sent").permitAll()
+                               // .requestMatchers("/connection").authenticated()
+                               // .requestMatchers("/messages").hasRole("ADMIN")
                 )
                 .formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .defaultSuccessUrl("/").permitAll()
-                ).logout(
+
+                )
+
+
+                .logout(
                         logout -> logout
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                                 .logoutSuccessUrl("/")

@@ -9,8 +9,10 @@
         <li><span sec:authorize="isAnonymous()"><a href="/login" class="nav-link px-2 text-white">Belépés</a></span></li>
         <li><span sec:authorize="isAnonymous()"><a href="/regist" class="nav-link px-2 text-white">Regisztráció</a></span></li>
         <li><span sec:authorize="isAuthenticated()"><a href="/" class="nav-link px-2 text-white">Kijelentkezés</a></span></li>
-        <li><span sec:authorize="isAuthenticated()"><a href="/connection" class="nav-link px-2 text-white">Kapcsolat</a></span></li>
-        <li><span sec:authorize="hasRole('ROLE_ADMIN')"><a href="/messages" class="nav-link px-2 text-white">Üzenetek</a></span></li>
+        <li><span sec:authorize="permitAll"><a href="/connection" class="nav-link px-2 text-white">Kapcsolat</a></span></li>
+        <li><span sec:authorize="permitAll"><a href="/messages" class="nav-link px-2 text-white">Üzenetek</a></span></li>
+        <!-- ><li><span sec:authorize="isAuthenticated()"><a href="/connection" class="nav-link px-2 text-white">Kapcsolat</a></span></li>
+         <li><span sec:authorize="hasRole('ROLE_ADMIN')"><a href="/messages" class="nav-link px-2 text-white">Üzenetek</a></span></li> -->
       </ul>
     </div>
 

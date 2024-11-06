@@ -10,6 +10,22 @@
 <body>
 <div class="container">
   <h1>Üzenetek</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>email</th>
+            <th>üzenet</th>
+            <th>dátum</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="messages: ${messages}">
+            <td th:text="${messages.email}"></td>
+            <td th:text="${messages.message}"></td>
+            <td th:text="${messages.date}"></td>
+        </tr>
+        </tbody>
+    </table>
  </div>
 </body>
 <footer th:replace="~{footer}"> </footer>
