@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="Hu">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/styles/css/bootstrap.min.css}" rel="stylesheet" />
+    <title>INDEX</title>
+</head>
+<header th:replace="~{header}"> </header>
+<div class="container"></div>
+<body>
+<div class="container">
+    <h1>Regisztrációs hiba</h1>
+    <br />
+    <h2 th:text="${register_message}" />
+</div>
+</body>
+<footer th:replace="~{footer}"> </footer>
+</html>
