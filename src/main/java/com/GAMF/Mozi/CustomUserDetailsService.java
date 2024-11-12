@@ -17,12 +17,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UsersRepository userRepo;		// Dependency injection
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        UsersModell user = userRepo.findByEmail(userName)
+        User user = userRepo.findByEmail(userName)
                 .orElseThrow(() -> new UsernameNotFoundException("Email " + userName + " not found"));
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
                 getAuthorities(user));
     }
-    private static Collection<? extends GrantedAuthority> getAuthorities(UsersModell user) {
+    private static Collection<? extends GrantedAuthority> getAuthorities(User user) {
         Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(user.getRole());
         return authorities;
     }

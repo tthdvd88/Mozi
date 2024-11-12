@@ -10,7 +10,12 @@
 <body>
 <div class="container">
   <h1>Regisztráció</h1>
-
+  <form action="#" th:action="@{/register_send}" th:object="${register}" method="post">
+    <p><input type="text" th:field="*{name}" placeholder="Felhasználónév: " required/> </p>
+    <p><input type="text" th:field="*{email}" placeholder="E-mail cím: " required/> </p>
+    <p><input type="text" th:field="*{password}" placeholder="Jelszó: " required/> </p>
+    <p><input type="submit" value="Regisztráció" /></p>
+  </form>
 </div>
 </body>
 <footer th:replace="~{footer}"> </footer>

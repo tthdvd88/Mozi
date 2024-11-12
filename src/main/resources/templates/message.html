@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <link th:href="@{/styles/css/bootstrap.min.css}" rel="stylesheet" />
   <title>ÜZENETEK</title>
+  <style>
+      table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+          padding: 5px;
+      }
+      tr:nth-child(odd) {
+          background-color: #8F9AA5;
+      }
+  </style>
 </head>
 <header th:replace="~{header}"> </header>
 <div class="container"></div>
@@ -13,14 +23,12 @@
     <table>
         <thead>
         <tr>
-            <th>email</th>
             <th>üzenet</th>
             <th>dátum</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="messages: ${messages}">
-            <td th:text="${messages.email}"></td>
             <td th:text="${messages.message}"></td>
             <td th:text="${messages.date}"></td>
         </tr>

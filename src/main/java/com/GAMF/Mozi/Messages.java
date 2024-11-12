@@ -1,17 +1,20 @@
 package com.GAMF.Mozi;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.text.SimpleDateFormat;
 
 @Entity
-@Table(name="messages")
+// @Table(name="messages")
 
 public class Messages {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    //hibernate verzió miatt kell
+    @GeneratedValue(strategy = GenerationType.AUTO,generator="native")
+    @GenericGenerator(name="native",strategy = "native")
+    private int id = 1;
     @Column(name="email")
     private String email;
     @Column(name="message")

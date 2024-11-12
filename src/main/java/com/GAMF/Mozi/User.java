@@ -4,12 +4,15 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="users")
-public class UsersModell {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name="name")
     private String name;
+    @Column(name="email")
     private String email;
+    @Column(name="password")
     private String password;
     private String role;
 

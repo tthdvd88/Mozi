@@ -1,6 +1,7 @@
 package com.GAMF.Mozi;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,8 @@ public class HomeController {
     //Message repo létrehozása a controllerben
     @Autowired
     private MessagesRepo messagesRepo;
+    @Autowired
+    private UsersRepository usersRepository;
 
     @GetMapping("/")
     public String getIndex() {
@@ -34,6 +37,30 @@ public class HomeController {
         return "message";
     }
 
+
+    @GetMapping("/register")
+    public String ShowRegist(Model model) {
+        User user = new User();
+        model.addAttribute("register", user);
+        return "register_form";
+    }
+
+    //Regisztrációs form küldés
+    @PostMapping("/register_send")
+    public String sendRegistration(@ModelAttribute User user, BindingResult result, Model model){
+        for(User user2: usersRepository.findAll())
+            if(user2.getEmail().equals(user.getEmail())){
+                model.addAttribute("register_message","Ezzel az e-mail címmel már létezik felhasználó");
+                return "/register_error";
+            }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole("ROLE_USER");
+        usersRepository.save(user);
+        return "/register_success";
+    }
+
+
     //Kiegészítve 11.04 TD
     @GetMapping("/connection")
     public String ShowConnection(Model model) {
@@ -42,11 +69,6 @@ public class HomeController {
         return "connection_form";
 
     }
-    @GetMapping("/regist")
-    public String ShowRegist() {
-        return "registF";
-    }
-
 
     //Kapcsolat form küldés
     @PostMapping("/send")
@@ -55,7 +77,7 @@ public class HomeController {
             return "contact_form";
         }
         messagesRepo.save(messages);
-        return "contact_send";
+        return "connection_sent";
 
     }
 

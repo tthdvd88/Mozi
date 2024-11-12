@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,9 +21,16 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class WebSecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
-    @Bean
-    public static PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
+    //@Bean
+    //public static PasswordEncoder passwordEncoder(){
+    //    return new BCryptPasswordEncoder();
+    //}
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(customUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Bean
@@ -30,13 +38,13 @@ public class WebSecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers("/","/program", "regist", "login").permitAll()
+                                .requestMatchers("/","/program", "register", "login").permitAll()
                                 .requestMatchers("/styles/**").permitAll()
-                                .requestMatchers("/connection").permitAll()
-                                .requestMatchers("/messages").permitAll()
                                 .requestMatchers("/connection_sent").permitAll()
-                               // .requestMatchers("/connection").authenticated()
-                               // .requestMatchers("/messages").hasRole("ADMIN")
+                                .requestMatchers("/send").authenticated()
+                                .requestMatchers("/register_send").permitAll()
+                                .requestMatchers("/connection").authenticated()
+                               .requestMatchers("/messages").hasRole("ADMIN")
                 )
                 .formLogin(
                         form -> form
