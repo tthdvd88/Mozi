@@ -1,7 +1,31 @@
-CREATE DATABASE IF NOT EXISTS `mozimusor`
-CHARACTER SET utf8 COLLATE utf8_general_ci;
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Nov 12, 2024 at 07:42 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
-USE `mozimusor`;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `mozimusor`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `film`
+--
 
 CREATE TABLE `film` (
   `fkod` varchar(4) NOT NULL,
@@ -11,8 +35,11 @@ CREATE TABLE `film` (
   `szarmazas` varchar(55) DEFAULT NULL,
   `mufaj` varchar(13) DEFAULT NULL,
   `hossz` varchar(5) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `film`
+--
 
 INSERT INTO `film` (`fkod`, `filmcim`, `szines`, `szinkron`, `szarmazas`, `mufaj`, `hossz`) VALUES
 ('1', 'Ágnes öcsénk', '-1', 'fel', 'német', 'dráma', '115'),
@@ -170,11 +197,20 @@ INSERT INTO `film` (`fkod`, `filmcim`, `szines`, `szinkron`, `szarmazas`, `mufaj
 ('98', 'Nesze neked, Pete Tong!', '-1', 'fel', 'angol-kanadai', 'vígjáték', '90'),
 ('99', 'Nézz balra, ott egy svéd!', '-1', 'fel', 'dán', 'vígjáték', '90');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hely`
+--
+
 CREATE TABLE `hely` (
   `fkod` varchar(4) DEFAULT NULL,
   `moziazon` varchar(8) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `hely`
+--
 
 INSERT INTO `hely` (`fkod`, `moziazon`) VALUES
 ('1', '8'),
@@ -533,13 +569,47 @@ INSERT INTO `hely` (`fkod`, `moziazon`) VALUES
 ('154', '24'),
 ('154', '37');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL,
+  `date` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `email`, `message`, `date`) VALUES
+(202, NULL, 'SAP account request', '2024.11.04'),
+(203, NULL, 'Nem működik az egerem', '2024.11.11'),
+(204, NULL, 'SAP account request', '2024.11.11'),
+(205, NULL, 'Hibás bejelentkezési adatok', '2024.11.12'),
+(206, NULL, 'Nem működik az egerem', '2024.11.12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mozi`
+--
+
 CREATE TABLE `mozi` (
   `moziazon` varchar(8) NOT NULL,
   `mozinev` varchar(34) DEFAULT NULL,
   `irszam` varchar(6) DEFAULT NULL,
   `cim` varchar(41) DEFAULT NULL,
   `telefon` varchar(7) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `mozi`
+--
 
 INSERT INTO `mozi` (`moziazon`, `mozinev`, `irszam`, `cim`, `telefon`) VALUES
 ('1', 'A38 Hajó', '1113', 'Petõfi híd budai hídfõ', '4643940'),
@@ -585,20 +655,12 @@ INSERT INTO `mozi` (`moziazon`, `mozinev`, `irszam`, `cim`, `telefon`) VALUES
 ('8', 'Cirko-Gejzír', '1055', 'Balassi Bálint u. 15-17.', '2690904'),
 ('9', 'Corvin Budapest Filmpalota', '1082', 'Corvin köz 1.', '4595050');
 
-ALTER TABLE `film`
-  ADD PRIMARY KEY (`fkod`);
-  
-  ALTER TABLE `hely`
-  ADD KEY `fkod` (`fkod`),
-  ADD KEY `moziazon` (`moziazon`);
-  
-ALTER TABLE `mozi`
-  ADD PRIMARY KEY (`moziazon`);
+-- --------------------------------------------------------
 
-ALTER TABLE `hely`
-  ADD CONSTRAINT `hely_ibfk_1` FOREIGN KEY (`fkod`) REFERENCES `film` (`fkod`),
-  ADD CONSTRAINT `hely_ibfk_2` FOREIGN KEY (`moziazon`) REFERENCES `mozi` (`moziazon`);
-  
+--
+-- Table structure for table `users`
+--
+
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -607,13 +669,79 @@ CREATE TABLE `users` (
   `role` varchar(30) NOT NULL DEFAULT 'ROLE_USER'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `users`
+--
+
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`) VALUES
 (1, 'Admin', 'admin@gmail.com', '$2a$10$QEaf3I.eLiZC4F4pDnqmC.sTysFlJ59wgROmw3ATxceFs/wgg0LvK', 'ROLE_ADMIN'),
-(3, 'User', 'user@gmail.com', '$2a$10$exVjZOnYQ3oFdNTFP7qVHOoL8K2XhKpWXY3r8duw8v9pTNxmC0qbm', 'ROLE_USER');
+(3, 'User', 'user@gmail.com', '$2a$10$exVjZOnYQ3oFdNTFP7qVHOoL8K2XhKpWXY3r8duw8v9pTNxmC0qbm', 'ROLE_USER'),
+(4, 'david', 'david@gmail.com', '$2a$10$kiZN.fhe/Mt3.OQsSRC0MOaIOHbfrOSqAz5lav87MseIWnUvfRorq', 'ROLE_USER'),
+(5, 'janos', 'janos@gmail.com', '$2a$10$eva8y101VbXHaEoY/gP17O3ut7hVBcBuDZ4Qvo3z92/VNywokVDGC', 'ROLE_USER');
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `film`
+--
+ALTER TABLE `film`
+  ADD PRIMARY KEY (`fkod`);
+
+--
+-- Indexes for table `hely`
+--
+ALTER TABLE `hely`
+  ADD KEY `fkod` (`fkod`),
+  ADD KEY `moziazon` (`moziazon`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `mozi`
+--
+ALTER TABLE `mozi`
+  ADD PRIMARY KEY (`moziazon`);
+
+--
+-- Indexes for table `users`
+--
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `hely`
+--
+ALTER TABLE `hely`
+  ADD CONSTRAINT `hely_ibfk_1` FOREIGN KEY (`fkod`) REFERENCES `film` (`fkod`),
+  ADD CONSTRAINT `hely_ibfk_2` FOREIGN KEY (`moziazon`) REFERENCES `mozi` (`moziazon`);
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
