@@ -1,6 +1,8 @@
 package com.GAMF.Mozi;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="users")
@@ -9,6 +11,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name="name")
+    @NotNull
+    @Size(min=5,max=20)
     private String name;
     @Column(name="email")
     private String email;

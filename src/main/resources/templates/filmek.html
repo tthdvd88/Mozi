@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="Hu">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/styles/css/bootstrap.min.css}" rel="stylesheet" />
+    <title>ÜZENETEK</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+        tr:nth-child(odd) {
+            background-color: #8F9AA5;
+        }
+    </style>
+</head>
+<header th:replace="~{header}"> </header>
+<div class="container"></div>
+<body>
+<div class="container">
+    <h1 th:text="${mozinev}"></h1>
+    <p th:utext="${adottFilm}"></p>
+
+</div>
+</body>
+<footer th:replace="~{footer}"> </footer>
+</html>

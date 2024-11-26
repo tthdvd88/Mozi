@@ -45,6 +45,7 @@ public class WebSecurityConfig {
                                 .requestMatchers("/register_send").permitAll()
                                 .requestMatchers("/connection").authenticated()
                                .requestMatchers("/messages").hasRole("ADMIN")
+                                .requestMatchers("/mozimusor/*").permitAll()
                 )
                 .formLogin(
                         form -> form

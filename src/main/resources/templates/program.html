@@ -10,6 +10,22 @@
 <body>
 <div class="container">
   <h1>Műsor</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Mozinév</th>
+      <th>Moziműsor</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="mozi: ${mozi}">
+      <td th:text="${mozi.mozinev}"></td>
+      <td>
+      <a th:href="@{'/mozimusor/'+${mozi.moziazon}}">Moziműsor megnyitása</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 </body>
 <footer th:replace="~{footer}"> </footer>
