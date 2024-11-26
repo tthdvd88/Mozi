@@ -10,12 +10,15 @@
         <li><span sec:authorize="isAnonymous()"><a href="/register" class="nav-link px-2 text-white">Regisztráció</a></span></li>
         <li><span sec:authorize="isAuthenticated()"><a href="/" class="nav-link px-2 text-white">Kijelentkezés</a></span></li>
         <li><span sec:authorize="permitAll"><a href="/connection" class="nav-link px-2 text-white">Kapcsolat</a></span></li>
-        <li><span sec:authorize="permitAll"><a href="/messages" class="nav-link px-2 text-white">Üzenetek</a></span></li>
-        <!-- ><li><span sec:authorize="isAuthenticated()"><a href="/connection" class="nav-link px-2 text-white">Kapcsolat</a></span></li>
-         <li><span sec:authorize="hasRole('ROLE_ADMIN')"><a href="/messages" class="nav-link px-2 text-white">Üzenetek</a></span></li> -->
+        <li><span sec:authorize="hasRole('ROLE_ADMIN')"><a href="/messages" class="nav-link px-2 text-white">Üzenetek</a> </span></li>
       </ul>
     </div>
 
   </div>
-  <span class="badge text-bg-primary rounded-pill">Primary</span>
+  <div class="container">
+    <span sec:authorize="isAnonymous()" class="badge text-bg-primary rounded-pill">Vendég</span>
+    <span sec:authorize="hasRole('ROLE_USER')" class="badge rounded-pill bg-success">Bejelentkezve</span>
+    <span sec:authorize="hasRole('ROLE_ADMIN')" class="badge rounded-pill bg-danger">Admin</span>
+  </div>
+
 </header>

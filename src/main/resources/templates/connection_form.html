@@ -13,6 +13,7 @@
     <br />
     <form action="#" th:action="@{/send}" th:object="${messages}" method="post">
         <p><input type="text" th:field="*{message}" placeholder="Üzenet: " required/> </p>
+        <p th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></p>
         <p><input type="submit" value="Küldés" /></p>
     </form>
 </div>
