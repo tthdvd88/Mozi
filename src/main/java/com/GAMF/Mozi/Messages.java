@@ -1,7 +1,11 @@
 package com.GAMF.Mozi;
 
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.GenericGenerator;
+
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
 import java.text.SimpleDateFormat;
 
@@ -17,6 +21,8 @@ public class Messages {
     private int id = 1;
     @Column(name="email")
     private String email;
+    @NotNull
+    @Size(min=2, max=30)
     @Column(name="message")
     private String message;
     private String date = new SimpleDateFormat("yyyy.MM.dd").format(new java.util.Date());

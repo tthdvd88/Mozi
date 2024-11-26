@@ -38,12 +38,12 @@ public class WebSecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers("/","/program", "register", "login").permitAll()
+                                .requestMatchers("/","/program", "register", "login", "/connection").permitAll()
                                 .requestMatchers("/styles/**").permitAll()
+                                .requestMatchers("/images/**").permitAll()
                                 .requestMatchers("/connection_sent").permitAll()
-                                .requestMatchers("/send").authenticated()
+                                .requestMatchers("/send").permitAll()
                                 .requestMatchers("/register_send").permitAll()
-                                .requestMatchers("/connection").authenticated()
                                .requestMatchers("/messages").hasRole("ADMIN")
                 )
                 .formLogin(

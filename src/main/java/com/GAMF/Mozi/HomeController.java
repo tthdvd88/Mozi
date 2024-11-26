@@ -1,5 +1,6 @@
 package com.GAMF.Mozi;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -72,9 +73,9 @@ public class HomeController {
 
     //Kapcsolat form küldés
     @PostMapping("/send")
-    public String sendMessage(@ModelAttribute Messages messages, BindingResult result, Model model){
+    public String sendMessage(@Valid @ModelAttribute Messages messages, BindingResult result, Model model){
         if (result.hasErrors()) {
-            return "contact_form";
+            return "connection_form";
         }
         messagesRepo.save(messages);
         return "connection_sent";
